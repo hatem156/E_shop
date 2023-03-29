@@ -2,6 +2,7 @@
 
 import 'package:app1/widgets/constant_colors.dart';
 import 'package:app1/widgets/item.dart';
+import 'package:app1/widgets/row_content.dart';
 import 'package:flutter/material.dart';
 
 class Details extends StatefulWidget {
@@ -21,35 +22,8 @@ class _DetailsState extends State<Details> {
       appBar: AppBar(
         backgroundColor: appbargreen,
         title: const Text("Details Screen"),
-        actions: [
-          Row(
-            children: [
-              Stack(
-                children: [
-                  Positioned(
-                    bottom: 25,
-                    left: 2,
-                    child: Container(
-                        padding: const EdgeInsets.all(3),
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(211, 164, 255, 193),
-                            shape: BoxShape.circle),
-                        child: const Text(
-                          "8",
-                          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                        )),
-                  ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.add_shopping_cart)),
-                ],
-              ),
-              const Padding(
-                padding: EdgeInsets.only(right: 12),
-                child: Text("\$ 128"),
-              )
-            ],
-          )
+        actions: const [
+          Content(),
         ],
       ),
       body: SingleChildScrollView(

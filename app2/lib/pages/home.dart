@@ -1,49 +1,26 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:app1/pages/details.dart';
+import 'package:app1/provider/cart.dart';
 import 'package:app1/widgets/constant_colors.dart';
+import 'package:app1/widgets/row_content.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/item.dart';
 
-class Home extends StatelessWidget { 
+class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final classInstancee = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appbargreen,
         title: const Text("Home"),
-        actions: [
-          Row(
-            children: [
-              Stack(
-                children: [
-                  Positioned(
-                    bottom: 25,
-                    left: 2,
-                    child: Container(
-                        padding: const EdgeInsets.all(3),
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(211, 164, 255, 193),
-                            shape: BoxShape.circle),
-                        child: const Text(
-                          "8",
-                          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                        )),
-                  ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.add_shopping_cart)),
-                ],
-              ),
-              const Padding(
-                padding: EdgeInsets.only(right: 12),
-                child: Text("\$ 128"),
-              )
-            ],
-          )
+        actions: const [
+          Content(),
         ],
       ),
       drawer: Drawer(
@@ -109,8 +86,11 @@ class Home extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context)=>Details(product:items[index] ,)),
-                    );
+                    MaterialPageRoute(
+                        builder: (context) => Details(
+                              product: items[index],
+                            )),
+                  );
                 },
                 child: GridTile(
                   child: Stack(children: [
@@ -126,9 +106,11 @@ class Home extends StatelessWidget {
                   footer: GridTileBar(
                     trailing: IconButton(
                         color: const Color.fromARGB(255, 62, 94, 70),
-                        onPressed: () {},
+                        onPressed: () {
+                          classInstancee.add(items[index]);
+                        },
                         icon: const Icon(Icons.add)),
-                    leading: const Text("\$12.99"),
+                    leading: Text("\$ ${items[index].price}"),
                     title: const Text(""),
                   ),
                 ),
